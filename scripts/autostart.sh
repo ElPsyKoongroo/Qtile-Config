@@ -2,3 +2,5 @@
 
 nitrogen --restore &
 picom --config $HOME/.config/qtile/scripts/picom.conf &
+
+python ./prueba.py &
