@@ -1,36 +1,10 @@
-# Copyright (c) 2010 Aldo Cortesi
-# Copyright (c) 2010, 2014 dequis
-# Copyright (c) 2012 Randall Ma
-# Copyright (c) 2012-2014 Tycho Andersen
-# Copyright (c) 2012 Craig Barnes
-# Copyright (c) 2013 horsik
-# Copyright (c) 2013 Tao Sauvage
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
 import os
 import subprocess
 from typing import List  # noqa: F401
 from libqtile import layout, bar, hook
 from libqtile.config import Drag, Group, Key, Match, Screen
 from libqtile.command import lazy
-from settings.widgets import init_widgets_screen1
+from settings.widgets import init_widgets_screen1, init_widgets_screen2
 from settings.shortcuts import get_keys
 
 # mod4 or mod = super key
@@ -55,10 +29,10 @@ def window_to_next_group(qtile):
 
 
 groups = [
-    Group("1", label="", layout="monadtall"),
-    Group("2", label="", layout="monadtall"),
-    Group("3", label="", layout="monadtall"),
-    Group("4", label="", layout="monadtall"),
+    Group("1", label="", layout="monadtall"),
+    Group("2", label="", layout="monadtall"),
+    Group("3", label="", layout="monadtall"),
+    Group("4", label="", layout="monadtall"),
     Group("5", label="", layout="monadtall"),
     Group("6", label="", layout="monadtall"),
     Group("7", label="", layout="monadtall"),
@@ -78,8 +52,7 @@ for i in groups:
         Key([mod, "shift"], "Tab", lazy.screen.prev_group()),
         Key(["mod1"], "Tab", lazy.screen.next_group()),
         Key(["mod1", "shift"], "Tab", lazy.screen.prev_group()),
-        Key([mod, "shift"], i.name, lazy.window.togroup(
-            i.name), lazy.group[i.name].toscreen()),
+        Key([mod, "shift"], i.name, lazy.window.togroup(i.name), lazy.group[i.name].toscreen()),
     ])
 
 
@@ -95,8 +68,8 @@ layout_theme = init_layout_theme()
 
 
 layouts = [
-    layout.MonadTall(margin=10, border_width=4,
-                     border_focus="#A77AC4", border_normal="#aeaeae"),
+    layout.MonadTall(margin=5, border_width=2,
+                     border_focus="#A77AC4", border_normal="#aeaeae", round=True),
     layout.MonadWide(margin=8, border_width=2,
                      border_focus="#5e81ac", border_normal="#4c566a"),
     layout.Matrix(**layout_theme),
@@ -137,8 +110,8 @@ def init_screens():
     # w = '~/Imágenes/wallpapers/kurisu.jpg'
 
     return [
-        Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=26, opacity=0.8)),
-        # Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=26, opacity=0.8))
+        Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=20, opacity=1)),
+        Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=20, opacity=1))
     ]
 
 
@@ -160,9 +133,12 @@ def assign_app_group(client):
     d = {}
     d["1"] = ["Code", "Visual Studio Code", "VScode", "code"]
     d["2"] = ["Terminator", "terminator"]
-    d["3"] = ["Firefox", "firefox", "mozilla", "Navigator", "Mozilla Firefox", "mozilla firefox"]
-    d["4"] = ["discord", "Teamspeak 3"]
+    d["3"] = ["Firefox", "firefox", "mozilla",
+              "Navigator", "Mozilla Firefox", "mozilla firefox"]
+    d["4"] = ["discord", "ts3client_linux_amd64"]
+    d["6"] = ["whatsapp-for-linux"]
     d["8"] = ["Nautilus", "nautilus", "Files", "files"]
+    d["9"] = ["Steam"]
     d["0"] = ["TelegramDesktop", "telegram-desktop"]
     ######################################################################################
 
@@ -209,9 +185,6 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class='ssh-askpass'),  # ssh-askpass
     Match(title='branchdialog'),  # gitk
     Match(title='pinentry'),  # GPG key password entry
-    Match(wm_class='Arcolinux-welcome-app.py'),
-    Match(wm_class='Arcolinux-tweak-tool.py'),
-    Match(wm_class='Arcolinux-calamares-tool.py'),
     Match(wm_class='confirm'),
     Match(wm_class='dialog'),
     Match(wm_class='download'),
@@ -225,6 +198,7 @@ floating_layout = layout.Floating(float_rules=[
     Match(wm_class='Galculator'),
     Match(wm_class='arcolinux-logout'),
     Match(wm_class='xfce4-terminal'),
+    Match(title="Resize Canvas")
 
 ],  fullscreen_border_width=0, border_width=0)
 auto_fullscreen = True

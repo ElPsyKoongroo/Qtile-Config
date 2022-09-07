@@ -23,7 +23,7 @@ keys = [
 
     # QTILE LAYOUT KEYS
     Key([mod], "n", lazy.layout.normalize()),
-    Key([mod], "space", lazy.next_layout()),
+    # Key([mod], "space", lazy.next_layout()),
 
     # CHANGE FOCUS
     Key([mod], "Up", lazy.layout.up()),
@@ -103,10 +103,12 @@ keys = [
 
     # TOGGLE FLOATING LAYOUT
     Key([mod, "shift"], "space", lazy.window.toggle_floating()),
+
+    Key([mod], "s", lazy.next_screen())
 ]
 
 keys.extend([
-    Key([mod], "m", lazy.spawn("rofi -show drun")),
+        Key([mod], "m", lazy.spawn("rofi -combi-modi window,drun -show-icons -theme glue_pro_blue -show drun")),
     Key([mod], "c", lazy.spawn("code")),
     Key([mod], "w", lazy.spawn("firefox")),
     Key([mod], "Return", lazy.spawn("terminator")),

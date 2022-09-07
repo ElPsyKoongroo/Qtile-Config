@@ -27,27 +27,27 @@
         "#f1ffff",
         "#f1ffff"
     ],
-    "inactive": [
+    "blue": [
         "#4c566a",
         "#4c566a"
     ],
-    "color1": [
+    "red": [
         "#ff5555",
         "#ff5555"
     ],
-    "color2": [
+    "purple": [
         "#A77AC4",
         "#A77AC4"
     ],
     "color3": [
-        "#7197E7",
-        "#7197E7"
+        "#0097E7",
+        "#0097E7"
     ],
-    "color4": [
+    "orange": [
         "#ffb86c",
         "#ffb86c"
     ],
-    "color5": [
+    "green": [
         "#3bd163",
         "#3bd163"
     ]
